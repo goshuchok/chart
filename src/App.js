@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import ChartComponent from './components/ChartComponent';
+import InputLabel from './components/InputLabel';
+import RadioButton from './components/RadioButton';
 
 function App() {
+  const [chart, setChat] = useState('');
+  const [term, setTerm] = useState('');
+  const [type, setType] = useState('bar');
+  const changeType = () => {
+    setType((currentValue) => (currentValue === 'bar' ? 'line' : 'bar'));
+  };
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React Chart</h1>
+      <InputLabel
+        chart={chart}
+        setChat={setChat}
+        term={term}
+        setTerm={setTerm}
+      />
+      <ChartComponent chart={chart} term={term} type={type} />
+      <RadioButton changeType={changeType} />
     </div>
   );
 }
